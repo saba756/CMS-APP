@@ -25,7 +25,7 @@ export class CustomerComponent {
   }
 
   getCustomer() {
-    this.cutomerService.getCustomer().subscribe((cus: ICustomer[]) =>{
+    this.cutomerService.getCustomers().subscribe((cus: ICustomer[]) =>{
       console.log("customers ---> ", cus)
       this.customer = cus
     })
@@ -44,5 +44,10 @@ console.log("in delete", id)
     console.log("failed to delete customer... ")
  });
   }
-  
-}
+  editCustomer(id:any){
+    this.router.navigate(['/edit-customer'],{
+      queryParams:{customerId:id}
+    });
+  }
+  }
+

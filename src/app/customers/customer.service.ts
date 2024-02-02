@@ -15,18 +15,24 @@ export class CustomerService {
   constructor(private http: HttpClient,
     private router: Router) { }
 
-    getCustomer(): Observable<ICustomer[]> {
+    getCustomers(): Observable<ICustomer[]> {
         return this.http.get<ICustomer[]>(this.baseUrl + 'customers').pipe(map((customers: ICustomer[]) => {
           console.log("customers: ", customers)
           return customers
         }));
       }
-
+      getCustomer(id: number) {
+        return this.http.get(this.baseUrl + 'customers/' + id);
+      }
+      
       createCustomer(customer: ICustomer){
         return this.http.post(this.baseUrl + 'customers', customer);
       }
       deleteCustomer(customerid:number){
         console.log("customer id",this.baseUrl + 'customer/' + customerid)
         return this.http.delete(this.baseUrl + 'customers/' + customerid);
+      }
+      editCustomer(customerid:number){
+        return this.http.put(this.baseUrl + 'customers', customerid);
       }
 }
