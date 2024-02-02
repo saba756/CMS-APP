@@ -4,6 +4,7 @@ import { CustomerService } from '../customer.service';
 import {CommonModule} from '@angular/common';
 import { ModalComponent } from '../../modal/modal.component';
 import { Router } from '@angular/router';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-customer',
@@ -34,6 +35,14 @@ export class CustomerComponent {
     console.log("opening modal .... ")
    // this.modalComponent.openModal();
    this.router.navigateByUrl('create-customer');
+  }
+  delete(id:any){
+console.log("in delete", id)
+ this.cutomerService.deleteCustomer(id).subscribe(response => {
+  this.getCustomer();
+ }, error => {
+    console.log("failed to delete customer... ")
+ });
   }
   
 }

@@ -11,6 +11,7 @@
           <th>Customer Email</th>
           <th>Payment method</th>
           <th>Payment Descrption</th>
+          <th>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -20,6 +21,10 @@
               <td>{{cust.customerEmail}}</td>
               <td>{{cust.paymentMethodCode}}</td>
               <td>{{cust.customerPhone}}</td>
+              <td class="action-btn">
+                  <button class="btn edit-btn">Edit</button>&nbsp;
+                  <button class="btn delete-btn" (click)="delete(cust.customerId)">Delete</button>
+              </td>
             </tr>
             </tbody>
 </table>

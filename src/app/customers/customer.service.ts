@@ -25,4 +25,8 @@ export class CustomerService {
       createCustomer(customer: ICustomer){
         return this.http.post(this.baseUrl + 'customers', customer);
       }
+      deleteCustomer(customerid:number){
+        console.log("customer id",this.baseUrl + 'customer/' + customerid)
+        return this.http.delete(this.baseUrl + 'customers/' + customerid);
+      }
 }
