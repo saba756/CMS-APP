@@ -1,0 +1,25 @@
+<div class="customerlist">
+    <h1>Customer List</h1>
+<button (click)="openModal()">Create Customer</button>
+<!-- <button *ngIf="order" routerLink="/orders/{{order?.id}}" class="btn btn-outline-success">View your order</button> -->
+</div>
+
+<table id="customers">
+    <thead class="thead-light">
+        <tr>
+          <th>Customer Name</th>
+          <th>Customer Email</th>
+          <th>Payment method</th>
+          <th>Payment Descrption</th>
+        </tr>
+        </thead>
+        <tbody>
+            
+            <tr *ngFor="let cust of customer">
+              <td>{{cust.customerName}}</td>
+              <td>{{cust.customerEmail}}</td>
+              <td>{{cust.paymentMethodCode}}</td>
+              <td>{{cust.customerPhone}}</td>
+            </tr>
+            </tbody>
+</table>

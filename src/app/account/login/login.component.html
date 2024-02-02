@@ -1,0 +1,18 @@
+
+
+<h1> lOGIN APP </h1>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <div class="container">
+
+
+    <label for="inputEmail"><b>Email address</b></label>
+    <input formControlName="email" type="text" id="inputEmail" placeholder="Email address" name="uname" required>
+
+    <label for="inputPassword"><b>Password</b></label>
+    <input formControlName="password" type="password" id="inputPassword" placeholder="Enter Password">
+
+    <button type="submit">Login</button>
+  </div>
+
+
+</form>
