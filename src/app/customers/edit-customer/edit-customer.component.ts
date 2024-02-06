@@ -5,6 +5,8 @@ import { CustomerService } from '../customer.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
+type NewType = undefined;
+
 @Component({
   selector: 'app-edit-customer',
   standalone: true,
@@ -14,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class EditCustomerComponent {
   customer: ICustomer[];
+ id:number= 0;
   customerForm: FormGroup;
   constructor(private cutomerService: CustomerService, private route: ActivatedRoute) { 
     this.customer = []
@@ -34,27 +37,35 @@ export class EditCustomerComponent {
   ngOnInit(): void {
     console.log('Test ID:',  this.route.params);
     this.route.params.subscribe(params => {
-   var id = params['customerId']; // Access the 'id' parameter from the URL
-      console.log('Test ID:', id);
+      this.id = params['id']; // Access the 'id' parameter from the URL
+     
     });
+    this.getCustomer()
   }
-getCustomerForm() {
-//this.cutomerService.getCustomer()
-    // this.customerForm = new FormGroup({
-    //   customerEmail: new FormControl('', [
-    //     Validators.required,
-    //     Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[0\\w-]{2,4}$'),
-    //   ]),
-    //   customerName: new FormControl('', [Validators.required]),
-    //   customerPhone: new FormControl('', [Validators.required]),
-    //   paymentMethodCode: new FormControl('', [Validators.required]),
-    //   paymentDetail: new FormControl('', [Validators.required]),
-    //   otherPaymentDetail: new FormControl('', [Validators.required]),
-    // });
+  getCustomer() {
+    this.cutomerService.getCustomer(this.id).subscribe((cus:ICustomer) =>{
+      console.log("customers ---> ", cus)
+      // this.customer = cus
+      this.createCustomerForm(cus)
+    })
+  }
+  createCustomerForm(cus:ICustomer) {
+    this.customerForm = new FormGroup({
+      customerEmail: new FormControl(cus.customerEmail, [
+        Validators.required,
+        Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[0\\w-]{2,4}$'),
+      ]),
+    
+      customerName: new FormControl(cus.customerName, [Validators.required]),
+      customerPhone: new FormControl(cus.customerPhone, [Validators.required]),
+      paymentMethodCode: new FormControl(cus.paymentMethodCode, [Validators.required]),
+      paymentDetail: new FormControl(cus.paymentDetail, [Validators.required]),
+      otherPaymentDetail: new FormControl(cus.otherPaymentDetail, [Validators.required]),
+    });
   }
   onSubmit() {
     console.log("VALUE",this.customerForm.value)
-    this.cutomerService.editCustomer(this.customerForm.value).subscribe(
+    this.cutomerService.editCustomer(this.id,this.customerForm.value).subscribe(
       () => {
       //  this.router.navigateByUrl('/customer');
       },

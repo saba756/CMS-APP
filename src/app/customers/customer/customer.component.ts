@@ -45,9 +45,7 @@ console.log("in delete", id)
  });
   }
   editCustomer(id:any){
-    this.router.navigate(['/edit-customer'],{
-      queryParams:{customerId:id}
-    });
+    this.router.navigate(['edit-customer/'+id]);
   }
   }
 

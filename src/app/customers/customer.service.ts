@@ -21,8 +21,12 @@ export class CustomerService {
           return customers
         }));
       }
-      getCustomer(id: number) {
-        return this.http.get(this.baseUrl + 'customers/' + id);
+      getCustomer(id: number): Observable<ICustomer> {
+        //return this.http.get(this.baseUrl + 'customers/' + id);
+        return this.http.get<ICustomer>(this.baseUrl+ 'customers/' + id).pipe(map((customers: ICustomer) => {
+          console.log("customers: ", customers)
+          return customers
+        }));
       }
       
       createCustomer(customer: ICustomer){
@@ -32,7 +36,8 @@ export class CustomerService {
         console.log("customer id",this.baseUrl + 'customer/' + customerid)
         return this.http.delete(this.baseUrl + 'customers/' + customerid);
       }
-      editCustomer(customerid:number){
-        return this.http.put(this.baseUrl + 'customers', customerid);
+      editCustomer(id:number,customer:ICustomer){
+        console.log("editcustomer",customer)
+        return this.http.put<ICustomer>(this.baseUrl + 'customers/' + id,customer);
       }
 }
