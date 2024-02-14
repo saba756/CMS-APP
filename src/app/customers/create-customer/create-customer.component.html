@@ -2,14 +2,16 @@
 <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
   <div class="container">
 
-    <label for="customerName"><b> customer Name</b></label>
+    <label for="customerName"><b> First Name</b></label>
     <input formControlName="customerName" type="text" id="customerName" placeholder="Enter name" name="name" required>
     <label for="inputEmail"><b> customer Email</b></label>
     <input formControlName="customerEmail" type="text" id="inputEmail" placeholder="Email address" name="uname" required>
 
     <label for="custPhone"><b> customer Phone</b></label>
     <input formControlName="customerPhone" type="text" id="custPhone" placeholder="Phone Number" name="custPhone" required>
-
+    <span class="text-danger" *ngIf="customerFormControl?.['customerPhone']?.touched && customerFormControl?.['customerPhone']?.status === 'INVALID'">
+      Customer Phone is invalid
+ </span>
     <label for="payDetail"><b>payment Detail</b></label>
     <input formControlName="paymentDetail" type="text" id="payDetail" placeholder="paymentDetail" name="payDetail" required>
 

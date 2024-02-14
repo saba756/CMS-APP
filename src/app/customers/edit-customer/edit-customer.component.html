@@ -19,7 +19,7 @@
     
     <label for="otherPaymentDetail"><b>other Payment Detail</b></label>
     <input formControlName="otherPaymentDetail" type="text" id="otherPaymentDetail" placeholder="otherPaymentDetail" name="otherPaymentDetail" required>
-    <button type="submit">Update Customer</button>
+    <button type="submit" [disabled]="!customerForm.valid">Update Customer</button>
   </div>
 
 

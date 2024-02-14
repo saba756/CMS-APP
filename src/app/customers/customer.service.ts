@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { ICustomer } from '../shared/models/customer';
+import { ICustomer, IcustomerAddresses } from '../shared/models/customer';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +31,10 @@ export class CustomerService {
       
       createCustomer(customer: ICustomer){
         return this.http.post(this.baseUrl + 'customers', customer);
+      }
+      createCustomerAddress(customer: IcustomerAddresses){
+        console.log("addresssesd",customer)
+        return this.http.post(this.baseUrl + 'address', customer);
       }
       deleteCustomer(customerid:number){
         console.log("customer id",this.baseUrl + 'customer/' + customerid)

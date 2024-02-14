@@ -1,0 +1,62 @@
+<table mat-table [dataSource]="dataSource.data" class="mat-elevation-z8">
+
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()">
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="Name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.addresses.firstName}} &nbsp; {{element.addresses.lastName}}  </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="city">
+      <th mat-header-cell *matHeaderCellDef> city </th>
+      <td mat-cell *matCellDef="let element"> {{element.addresses.city}} </td>
+    </ng-container>
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="street">
+        <th mat-header-cell *matHeaderCellDef> street </th>
+        <td mat-cell *matCellDef="let element"> {{element.addresses.street}} </td>
+      </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="state">
+      <th mat-header-cell *matHeaderCellDef> state </th>
+      <td mat-cell *matCellDef="let element"> {{element.addresses.state}} </td>
+    </ng-container>
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="zipCode">
+    <th mat-header-cell *matHeaderCellDef> zipCode </th>
+    <td mat-cell *matCellDef="let element"> {{element.addresses.zipCode}} </td>
+  </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+        [ngClass]="{highlighted: selection.isSelected(row)}" 
+        (click)="selection.toggle(row)">
+    </tr>
+    
+
+  </table>
+
+
+  
+  <!-- Copyright 2018 Google Inc. All Rights Reserved.
+      Use of this source code is governed by an MIT-style license that
+      can be found in the LICENSE file at http://angular.io/license -->

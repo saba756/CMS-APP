@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import { ICustomer } from '../../shared/models/customer';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CustomerService } from '../customer.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-
-type NewType = undefined;
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-edit-customer',
   standalone: true,
@@ -18,7 +16,8 @@ export class EditCustomerComponent {
   customer: ICustomer[];
  id:number= 0;
   customerForm: FormGroup;
-  constructor(private cutomerService: CustomerService, private route: ActivatedRoute) { 
+  constructor(private cutomerService: CustomerService,
+    private formBuilder:FormBuilder,private route: ActivatedRoute,private toastr: ToastrService,private router: Router) { 
     this.customer = []
     this.customerForm = new FormGroup({
       customerEmail: new FormControl('', [
@@ -44,8 +43,6 @@ export class EditCustomerComponent {
   }
   getCustomer() {
     this.cutomerService.getCustomer(this.id).subscribe((cus:ICustomer) =>{
-      console.log("customers ---> ", cus)
-      // this.customer = cus
       this.createCustomerForm(cus)
     })
   }
@@ -67,7 +64,8 @@ export class EditCustomerComponent {
     console.log("VALUE",this.customerForm.value)
     this.cutomerService.editCustomer(this.id,this.customerForm.value).subscribe(
       () => {
-      //  this.router.navigateByUrl('/customer');
+        this.toastr.success('Success!', 'Customer has been updated successfully!');
+        this.router.navigateByUrl('/customer');
       },
       (error) => {
         console.log(error);

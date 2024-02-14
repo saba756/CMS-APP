@@ -10,7 +10,9 @@
           <th>Customer Name</th>
           <th>Customer Email</th>
           <th>Payment method</th>
+          <th>Phone</th>
           <th>Payment Descrption</th>
+          <th>Total Addresses</th>
           <th>Action</th>
         </tr>
         </thead>
@@ -20,10 +22,22 @@
               <td>{{cust.customerName}}</td>
               <td>{{cust.customerEmail}}</td>
               <td>{{cust.paymentMethodCode}}</td>
-              <td>{{cust.customerPhone}}</td>
+              <td>{{cust.customerPhone  }}</td>
+              <td>{{cust.paymentDetail}}</td>
+              <td>{{cust.customerAddresses.length}}&nbsp;
+                <div  *ngIf="cust.customerAddresses.length > 0;else elseBlock">
+                <button class="btn delete-btn" (click)="ViewAddresses(cust.customerId)">View Addreeses</button>
+              </div>
+              <ng-template #elseBlock>
+                <button class="btn delete-btn" (click)="createCustomerAdress(cust.customerId)">create Addreeses</button>
+              </ng-template>
+              </td>
+        
               <td class="action-btn">
+                
                   <button class="btn edit-btn"(click)="editCustomer(cust.customerId)">Edit</button>&nbsp;
                   <button class="btn delete-btn" (click)="delete(cust.customerId)">Delete</button>
+              
               </td>
             </tr>
             </tbody>

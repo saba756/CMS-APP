@@ -29,5 +29,10 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
+  "styles": [
+    "styles.scss",
+    "node_modules/ngx-toastr/toastr.css" // try adding '../' if you're using angular cli before 6
+  ],
+  
 }
